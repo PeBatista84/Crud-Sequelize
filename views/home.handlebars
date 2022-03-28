@@ -1,0 +1,11 @@
+<div style="display:flex; align-items:center; justify-content:space-between;">
+    <h2>Lista de postagens:</h2>
+    <a href="/cad"><button>Criar POST.</button></a>
+</div>
+    {{#each postagens}}
+        <h4>{{dataValues.titulo}}</h4>
+        <p>{{dataValues.conteudo}}</p>
+        <a href="/deletar/{{dataValues.id}}"><button>Deletar</button></a>
+        <a href="/mais-detalhes/{{dataValues.id}}"><button>Mais Detalhes</button></a>
+        <hr>
+    {{/each}}

@@ -1,0 +1,27 @@
+<div style="height: 70vh;justify-content:center;
+            border: solid 1px black;
+            display: flex;
+            align-items:center;
+            flex-direction:column;">
+
+{{#each postagens}}
+    <h2>{{dataValues.titulo}}</h2>
+{{/each}}
+
+    {{#each postagens}}
+        <div style="
+                justify-content:center;
+                border: solid 1px black;
+                display: flex;
+                align-items:center;
+                flex-direction:column;
+                width: 280px;">
+
+                <h3>{{dataValues.titulo}}</h3>
+
+                <p>{{dataValues.conteudo}}</p>
+        </div>
+    {{/each}}
+    <a href="/"><button>Voltar</button></a>
+</div>
+
