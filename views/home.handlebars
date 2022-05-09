@@ -1,11 +1,92 @@
+ <style>
+    .pagination {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+</style>
+
 <div style="display:flex; align-items:center; justify-content:space-between;">
     <h2>Lista de postagens:</h2>
     <a href="/cad"><button>Criar POST.</button></a>
 </div>
-    {{#each postagens}}
-        <h4>{{dataValues.titulo}}</h4>
-        <p>{{dataValues.conteudo}}</p>
-        <a href="/deletar/{{dataValues.id}}"><button>Deletar</button></a>
-        <a href="/mais-detalhes/{{dataValues.id}}"><button>Mais Detalhes</button></a>
-        <hr>
-    {{/each}}
+    <section id="paginete">
+        <div class="list">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+        </div>
+        {{!-- {{#each postagens}}
+            <h4>{{dataValues.titulo}}</h4>
+            <p>{{dataValues.conteudo}}</p>
+            <a href="/deletar/{{dataValues.id}}"><button>Deletar</button></a>
+            <a href="/mais-detalhes/{{dataValues.id}}"><button>Mais Detalhes</button></a>
+            <hr>
+        {{/each}} --}}
+
+        <div class="pagination">
+            <div class="fist">&#171;</div>
+            <div class="prev">&lt;</div>
+            <div class="numbers">
+                <div>1</div>
+            </div>
+            <div class="next">&gt;</div>
+            <div class="last">&#187;</div>
+        </div>
+    </section>
+
+<script>
+    function populateList() {
+        var data = Array.from({length: 100}).map((_, i) => 
+            `<div class="item">Item ${(i+ 1)}</div>`
+        )
+
+        const list = document.querySelector('#paginate, .list');
+        list.innerHTML = data.join("")
+
+        return data
+    }
+
+    const data = populateList()
+
+    var perPage = 5
+    const state = {
+        page: 1,
+        perPage,
+        totalPage: Math.ceil(data.length / perPage)
+    }
+
+    const controls = {
+        next() {
+            state.page++;
+
+            const lastPage = state.page > state.totalPage;
+
+            if(lastPage) {
+                state.page--
+            }
+        },
+        prev() {
+            state.page--;
+
+            if(state.page < 1) {
+                state.page++;
+            }
+        },
+        goTo(page) {
+            state.page = page
+
+            if(page < 1) {
+                page = 1
+            }
+
+            if(page > state.totalPage) {
+                state.page = state.totalPage
+            }
+        }
+
+        createListeners() {
+            
+        }
+    }
+</script>
